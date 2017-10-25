@@ -1,15 +1,62 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import axios from 'axios'; 
+import SearchBar from './components/search_bar';
 
-import App from './components/app';
-import reducers from './reducers';
+const API_KEY = 'ba97ad63d202b24bf9b8e972f25ea9f1'; 
+const URL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=[searchterm]`; 
+// https://api.themoviedb.org/3/search/movie?api_key=ba97ad63d202b24bf9b8e972f25ea9f1&language=en-US&query=Harry+Potter
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchMovie: '',
+      searchResults: [],
+      selectedMovie: null
+    }
 
+    this.onInputChange = this.onInputChange.bind(this); 
+    this.onSubmitSearch = this.onSubmitSearch.bind(this); 
+  }
+
+  onInputChange(e) {
+    this.setState({searchMovie: e.target.value}); 
+  }
+
+  onSubmitSearch(event) {
+    if (event.which === 13 || event.key === 13) {
+      let searchTerm = this.state.searchMovie; 
+      // creating URL suitable for query 
+      const newSearchTerm = searchTerm.replace(' ', '+');
+      const newURL = URL.replace('[searchterm]', newSearchTerm);
+  
+     // making a get request 
+      axios.get(newURL)
+        .then(resp => {
+          this.setState({ searchResults: resp.data }); 
+          // this.setState({selectedMovie: this.state.searchResults[0]}); 
+        })
+        .catch(error => {
+          console.log(error);
+        });    
+    }
+  }
+
+  render() {
+    
+    console.log(this.state);
+    return (
+      <div>
+        <SearchBar 
+          value={this.state.searchMovie} 
+          onInputChange={this.onInputChange}
+          onSubmitSearch={this.onSubmitSearch} />
+      </div>
+    );
+  }
+}
+;
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <App />
-  </Provider>
-  , document.querySelector('.container'));
+  <App />, 
+  document.querySelector('.container'));
