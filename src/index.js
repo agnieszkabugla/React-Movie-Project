@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios'; 
 import SearchBar from './components/search_bar';
+import MovieList from './components/movie_list'; 
 
 const API_KEY = 'ba97ad63d202b24bf9b8e972f25ea9f1'; 
 const URL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=[searchterm]`; 
@@ -34,8 +35,10 @@ class App extends Component {
      // making a get request 
       axios.get(newURL)
         .then(resp => {
-          this.setState({ searchResults: resp.data }); 
-          // this.setState({selectedMovie: this.state.searchResults[0]}); 
+          if(resp.data && resp.data.results) {
+            this.setState({ searchResults: resp.data.results }); 
+            this.setState({selectedMovie: this.state.searchResults[0]}); 
+          }
         })
         .catch(error => {
           console.log(error);
@@ -52,6 +55,8 @@ class App extends Component {
           value={this.state.searchMovie} 
           onInputChange={this.onInputChange}
           onSubmitSearch={this.onSubmitSearch} />
+        <MovieList 
+          searchResults={this.state.searchResults} />
       </div>
     );
   }
