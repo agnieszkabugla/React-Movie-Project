@@ -1,34 +1,54 @@
-import React from 'react'; 
+import React, {Component} from 'react'; 
 
-const MovieListItem = (props) => {
-    // console.log(props);
-    if (!props.movie) {
-        return <div>Please, type in the movie title...</div>
+let imageURL = `https://image.tmdb.org/t/p/w150/[replace]`; 
+
+class MovieListItem extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {showHide: 'hidden'}; 
+
+        if (!this.props.movie) {
+            return <div>Please, type in the movie title...</div>
+        }
+
+        this.toggleMoreInfo = this.toggleMoreInfo.bind(this); 
+        this.onClickButton = this.onClickButton.bind(this);
     }
-
-    function onClickItem() {
-        props.onClickItem(props.movie.id); 
+    
+    onClickButton() {
+        this.props.onClickButton(this.props.movie.id); 
     };
 
-    let imageURL = `https://image.tmdb.org/t/p/w150/${props.movie.backdrop_path}`; 
-    
-
-    return (
-        <li 
-            className="list-group-item"
-            >
-            {props.movie.title}
-            {` (${props.movie.release_date.slice(0, 4)})`}
-            <br />
-            <img src={imageURL}/>
-            <br />
-            <span 
-                onClick={onClickItem}
-                className="btn btn btn-outline-info btn-sm">
-                Details
-            </span>
-        </li>
-    ); 
+    toggleMoreInfo() {
+        let css = (this.state.showHide === "hidden") ? "show" : "hidden"; 
+        this.setState({"showHide":css});        
+    }
+    render() {
+        return (
+            <li 
+                className="list-group-item"
+                onClick={this.toggleMoreInfo}
+                >
+                {this.props.movie.title}
+                {` (${this.props.movie.release_date.slice(0, 4)})`}
+                <br />
+                <div className={this.state.showHide}>
+                    <div className="row">
+                        <hr/>
+                        <img className="img-responsive" src={imageURL.replace('[replace]', this.props.movie.backdrop_path )}/>
+                        <hr />
+                        <span 
+                            onClick={this.onClickButton}
+                            className="btn btn-outline-info btn-sm btn-block">
+                            Details
+                        </span>
+                    </div>
+                </ div>
+            </li>
+        ); 
+    }
+   
 }
 
 export default MovieListItem; 

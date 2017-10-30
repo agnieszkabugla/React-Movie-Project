@@ -1,6 +1,8 @@
 import React, {Component} from 'react'; 
 import axios from 'axios'; 
-import _ from 'lodash'; 
+
+const API_KEY = 'ba97ad63d202b24bf9b8e972f25ea9f1'; 
+const URLforDetails = `https://api.themoviedb.org/3/movie/[selectedMovieId]?api_key=${API_KEY}`;
 
 const movieGenre = {
     28: 'action',
@@ -27,23 +29,38 @@ const movieGenre = {
 class MovieDetail extends Component {
     constructor(props) {
         super(props); 
-        this.state = {currentMovie: ''};
+        this.state = {
+            currentMovie: '',
+            selectedMovieImdbId: null
+        };
     };
     
     render() {
         if(!this.props.selectedMovie) {
-            return <div>Please, type in the movie title...</div>
+            return <div>Please, select the movie...</div>
         }; 
 
         let genreId = this.props.selectedMovie.genre_ids;
         let foundGenre = []; 
         if (Array.isArray(genreId)) {
-            genreId.forEach(x => { // x = 23 
+            genreId.forEach(x => {
                 if (movieGenre[x] != undefined) {
                     foundGenre.push(movieGenre[x]); 
                 }
             });
         };
+
+        // if(this.props.selectedMovie.id) {
+        //     let searchterm = URLforDetails.replace('[selectedMovieId]', this.props.selectedMovie.id);
+        //     axios.get(searchterm)
+        //       .then(resp => {
+        //         console.log(resp);
+        //         this.setState({ selectedMovieImdbId: resp.data.imdb_id});
+        //       })
+        //       .catch(error => {
+        //         console.log(error);     
+        //       });
+        // }
 
         let imageURL = `https://image.tmdb.org/t/p/w300/${this.props.selectedMovie.poster_path}`; 
 

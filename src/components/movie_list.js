@@ -6,7 +6,7 @@ const MovieList = (props) => {
     const movieItems = props.searchResults.map((movie) => {
         return <MovieListItem 
             key={movie.id}
-            onClickItem={props.onMovieSelected}
+            onClickButton={props.onMovieSelected}
             movie={movie} />
     })
 
