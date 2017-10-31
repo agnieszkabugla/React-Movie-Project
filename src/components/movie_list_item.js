@@ -40,7 +40,7 @@ class MovieListItem extends Component {
                         <hr />
                         <span 
                             onClick={this.onClickButton}
-                            className="btn btn-outline-info btn-sm btn-block">
+                            className="btn btn-light btn-sm btn-block">
                             Details
                         </span>
                     </div>

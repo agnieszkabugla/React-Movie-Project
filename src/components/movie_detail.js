@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import axios from 'axios'; 
 
 const API_KEY = 'ba97ad63d202b24bf9b8e972f25ea9f1'; 
-const URLforDetails = `https://api.themoviedb.org/3/movie/[selectedMovieId]?api_key=${API_KEY}`;
-
 const movieGenre = {
     28: 'action',
     12: 'adventure',
@@ -30,8 +28,7 @@ class MovieDetail extends Component {
     constructor(props) {
         super(props); 
         this.state = {
-            currentMovie: '',
-            selectedMovieImdbId: null
+            currentMovie: ''
         };
     };
     
@@ -39,6 +36,8 @@ class MovieDetail extends Component {
         if(!this.props.selectedMovie) {
             return <div>Please, select the movie...</div>
         }; 
+
+        // console.log(this.props.selectedMovieById);
 
         let genreId = this.props.selectedMovie.genre_ids;
         let foundGenre = []; 
@@ -50,24 +49,53 @@ class MovieDetail extends Component {
             });
         };
 
-        // if(this.props.selectedMovie.id) {
-        //     let searchterm = URLforDetails.replace('[selectedMovieId]', this.props.selectedMovie.id);
-        //     axios.get(searchterm)
-        //       .then(resp => {
-        //         console.log(resp);
-        //         this.setState({ selectedMovieImdbId: resp.data.imdb_id});
-        //       })
-        //       .catch(error => {
-        //         console.log(error);     
-        //       });
-        // }
+        if(this.props.selectedMovieById) {
+            const productionCountry = this.props.selectedMovieById.production_countries; 
+            const listItems = productionCountry.map((country) => {
+                <li>{country.name}</li>
+                console.log(country.name); 
+            })
+        }
 
         let imageURL = `https://image.tmdb.org/t/p/w300/${this.props.selectedMovie.poster_path}`; 
 
         return (
                 <div className="col-md-8">
-                        <h3>{this.props.selectedMovie.title}  {` (${this.props.selectedMovie.release_date.slice(0, 4)})`}</h3>
-                        <p>{foundGenre.join(", ")}</p>
+
+                        {!this.props.selectedMovieById ? (
+                            <div className="container-fluid">
+                                <div className="d-flex p-2 bg-light">
+                                    <h3>The most popular movie today: </h3>
+                                </div>
+                            </div>
+                        ) : (<p />) } 
+
+                        <div className="container-fluid">
+                            <div className="d-flex p-2 bg-light">
+                                <h3>
+                                    {this.props.selectedMovie.title}  
+                                    {` (${this.props.selectedMovie.release_date.slice(0, 4)})`}
+                                </h3>
+                            </div>
+                        </div>
+                        
+                        {this.props.selectedMovieById ? ( 
+                            <div className="container-fluid">
+                                <div className="d-flex p-2 bg-light">
+                                    <h5>{this.props.selectedMovieById.tagline}</h5>
+                                </div>
+                            </div>
+                        ) : (<p />) }
+
+                        <hr />
+                        
+                        <p className="text-center">GENRE: {foundGenre.join(", ")}</p>
+                        {/* <p>Production country: {this.country.name}</p> */}
+
+                        {this.props.selectedMovieById ? (
+                            <p>{this.props.country}</p>
+                        ) : (<p></p>)}
+
                         <div className="container">
                             <div className="row">
                                 <img className="img-responsive" src={imageURL} />
