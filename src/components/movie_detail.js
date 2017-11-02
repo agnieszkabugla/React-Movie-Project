@@ -28,16 +28,24 @@ class MovieDetail extends Component {
     constructor(props) {
         super(props); 
         this.state = {
-            currentMovie: ''
+            selectedMovieById: null
         };
     };
     
+    // TODO Update state SELECTEDMOVIEbyID
+    changeState(){
+        console.log(this.props.onMovieSelected);
+        this.props.changeState(this.props.onMovieSelected.selectedMovieById);
+        this.setState({selectedMovieById: this.props.changeState}); 
+    } 
+
+
     render() {
         if(!this.props.selectedMovie) {
             return <div>Please, select the movie...</div>
-        }; 
+        };
 
-        // console.log(this.props.selectedMovieById);
+        console.log(this.state);
 
         let genreId = this.props.selectedMovie.genre_ids;
         let foundGenre = []; 
@@ -49,17 +57,13 @@ class MovieDetail extends Component {
             });
         };
 
-        if(this.props.selectedMovieById) {
-            const productionCountry = this.props.selectedMovieById.production_countries; 
-            const listItems = productionCountry.map((country) => {
-                <li>{country.name}</li>
-                console.log(country.name); 
-            })
-        }
-
         let imageURL = `https://image.tmdb.org/t/p/w300/${this.props.selectedMovie.poster_path}`; 
+        //TODO create a videoURL
+        // console.log(this.props.selectedMovieById.videos.results);
+        // let videoURL = `https://www.youtube.com.embed/${videoID}`;
 
         return (
+            
                 <div className="col-md-8">
 
                         {!this.props.selectedMovieById ? (
@@ -83,6 +87,7 @@ class MovieDetail extends Component {
                             <div className="container-fluid">
                                 <div className="d-flex p-2 bg-light">
                                     <h5>{this.props.selectedMovieById.tagline}</h5>
+                                    <br />
                                 </div>
                             </div>
                         ) : (<p />) }
@@ -90,10 +95,11 @@ class MovieDetail extends Component {
                         <hr />
                         
                         <p className="text-center">GENRE: {foundGenre.join(", ")}</p>
-                        {/* <p>Production country: {this.country.name}</p> */}
+                         {/* {<p>Production country: {this.country}</p>}  */}
+                        {/* <h5>{this.props.selectedMovieById.production_countries.map((country => {<li>{country.name}</li>}))}</h5> */}
 
                         {this.props.selectedMovieById ? (
-                            <p>{this.props.country}</p>
+                            <p>Production country: {this.props.selectedMovieById.production_countries.map((country => {<ul>{country.name}</ul>}))}</p>
                         ) : (<p></p>)}
 
                         <div className="container">
