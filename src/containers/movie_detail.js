@@ -1,4 +1,5 @@
 import React, {Component} from 'react'; 
+import { connect } from 'react-redux';
 import axios from 'axios'; 
 
 const API_KEY = 'ba97ad63d202b24bf9b8e972f25ea9f1'; 
@@ -33,11 +34,11 @@ class MovieDetail extends Component {
     };
     
     // TODO Update state SELECTEDMOVIEbyID
-    changeState(){
-        console.log(this.props.onMovieSelected);
-        this.props.changeState(this.props.onMovieSelected.selectedMovieById);
-        this.setState({selectedMovieById: this.props.changeState}); 
-    } 
+    // changeState(){
+    //     console.log(this.props.onMovieSelected);
+    //     this.props.changeState(this.props.onMovieSelected.selectedMovieById);
+    //     this.setState({selectedMovieById: this.props.changeState}); 
+    // } 
 
 
     render() {
@@ -78,19 +79,19 @@ class MovieDetail extends Component {
                             <div className="d-flex p-2 bg-light">
                                 <h3>
                                     {this.props.selectedMovie.title}  
-                                    {` (${this.props.selectedMovie.release_date.slice(0, 4)})`}
+                                    {` (${this.props.selectedMovie.release_date})`}
                                 </h3>
                             </div>
                         </div>
                         
-                        {this.props.selectedMovieById ? ( 
+                        {/*{this.props.selectedMovieById ? ( 
                             <div className="container-fluid">
                                 <div className="d-flex p-2 bg-light">
                                     <h5>{this.props.selectedMovieById.tagline}</h5>
                                     <br />
                                 </div>
                             </div>
-                        ) : (<p />) }
+                        ) : (<p />) } */}
 
                         <hr />
                         
@@ -98,9 +99,9 @@ class MovieDetail extends Component {
                          {/* {<p>Production country: {this.country}</p>}  */}
                         {/* <h5>{this.props.selectedMovieById.production_countries.map((country => {<li>{country.name}</li>}))}</h5> */}
 
-                        {this.props.selectedMovieById ? (
+                        {/*{this.props.selectedMovieById ? (
                             <p>Production country: {this.props.selectedMovieById.production_countries.map((country => {<ul>{country.name}</ul>}))}</p>
-                        ) : (<p></p>)}
+                        ) : (<p></p>)} */}
 
                         <div className="container">
                             <div className="row">
@@ -114,4 +115,8 @@ class MovieDetail extends Component {
     }
 };
 
-export default MovieDetail;
+function mapStateToProps(state) {
+    return { selectedMovie: state.selectedMovie };
+}
+
+export default connect (mapStateToProps) (MovieDetail);

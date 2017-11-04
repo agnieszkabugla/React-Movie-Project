@@ -25,7 +25,10 @@ class MovieList extends Component {
 }
 
 function mapStateToProps(state) {
-    return { searchResults: state.searchResults }; 
+    return ( 
+        { searchResults: state.searchResults }, 
+        { selectedMovie: state.selectedMovie }
+     ); 
 }
 
 export default connect (mapStateToProps) (MovieList); 
