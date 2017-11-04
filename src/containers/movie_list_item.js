@@ -31,7 +31,7 @@ class MovieListItem extends Component {
                 onClick={this.toggleMoreInfo}
                 >
                 {this.props.movie.title}
-                {` (${this.props.movie.release_date.slice(0, 4)})`}
+                {` (${this.props.movie.release_date})`}
                 <br />
                 <div className={this.state.showHide}>
                     <div className="row">
