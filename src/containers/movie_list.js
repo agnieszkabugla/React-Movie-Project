@@ -25,8 +25,6 @@ class MovieList extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log("Mapstatetoprops invoked!");
-    console.log('state: ', state);
     return {
         searchResults: state.searchResults
     };
