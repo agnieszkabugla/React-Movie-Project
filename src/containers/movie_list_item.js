@@ -1,4 +1,7 @@
-import React, {Component} from 'react'; 
+import React, {Component} from 'react';
+import { getMovieDetails } from '../actions/index';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'; 
 
 let imageURL = `https://image.tmdb.org/t/p/w150/[replace]`; 
 
@@ -17,7 +20,7 @@ class MovieListItem extends Component {
     }
     
     onClickButton() {
-        this.props.onClickButton(this.props.movie.id); 
+        this.props.getMovieDetails(this.props.movie.id); 
     };
 
     toggleMoreInfo() {
@@ -51,4 +54,9 @@ class MovieListItem extends Component {
    
 }
 
-export default MovieListItem; 
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ getMovieDetails }, dispatch);
+  };
+
+  export default connect (null, mapDispatchToProps) (MovieListItem);   
+  

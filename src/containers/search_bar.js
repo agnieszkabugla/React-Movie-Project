@@ -27,7 +27,6 @@ class SearchBar extends Component {
         </div>
         );
     }
-
 }
 
 export default SearchBar; 

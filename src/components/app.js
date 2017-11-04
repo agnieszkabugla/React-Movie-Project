@@ -13,16 +13,13 @@ import MovieDetail from '../containers/movie_detail';
 
 const API_KEY = 'ba97ad63d202b24bf9b8e972f25ea9f1'; 
 
-// const popularityURL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`;
-const URLforDetails = `https://api.themoviedb.org/3/movie/[selectedMovieId]?api_key=${API_KEY}&append_to_response=videos`;
+const popularityURL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`;
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       searchMovie: '',
-      // searchResults: [],
-      selectedMovieById: null,
       selectedMovie: null
     }
 
@@ -38,43 +35,19 @@ class App extends Component {
   onSubmitSearch(event) {
     if (event.which === 13 || event.key === 13) {
       this.props.fetchMovies(this.state.searchMovie);
-    //   // creating URL suitable for query 
-    //   let searchTerm = this.state.searchMovie.replace('', '+'); 
-    //   const newURL = mainURL.replace('[searchterm]', searchTerm);
-  
-    //  // making a get request 
-    //   axios.get(newURL)
-    //     .then(resp => {
-    //       if(resp.data && resp.data.results) {
-    //         this.setState({ searchResults: resp.data.results }); 
-    //         this.setState({ selectedMovie: resp.data.results[0] }); 
-    //       }
-    //     })
-    //     .catch(error => {
-    //       console.log(error);
-    //     });    
     }
   }
 
   onMovieSelected(movieId) { 
-
-    if(this.props.selectedMovie === null) {
-     // this.props.getInitialState(this.state.selectedMovie); 
-    //   axios.get(popularityURL)
-    //   .then(resp => {
-    //     this.setState({selectedMovie: resp.data.results[0]});
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });   
-    // }
+    if(!movieId) {
+      return;
     }
+
     let selectedMovie = _.find(this.state.searchResults, x => x.id == movieId); 
     let searchterm = URLforDetails.replace('[selectedMovieId]', movieId);
 
     axios.get(searchterm)
       .then(resp => {
-        // console.log(resp);
         this.setState({ 
           selectedMovieById: resp.data,
           selectedMovie: selectedMovie
@@ -82,13 +55,10 @@ class App extends Component {
       })
       .catch(error => {
         this.setState({ selectedMovie: selectedMovie });
-        console.log(error);     
       });
   }
 
   render() {
-    
-    console.log(this.state);
     return (
       <div>
         <SearchBar 
@@ -98,13 +68,8 @@ class App extends Component {
           <div className="container">
             <div className="row">
               <MovieDetail 
-               /* searchResults={this.state.searchResults} */
-               /* selectedMovie={this.state.selectedMovie} */
-               /* onMovieSelected={this.onMovieSelected} */
                 selectedMovieById={this.state.selectedMovieById} />
               <MovieList
-                /* searchResults={this.state.searchResults} */
-                /* onMovieSelected={this.onMovieSelected} */ 
                 />
             </div>
           </div>
