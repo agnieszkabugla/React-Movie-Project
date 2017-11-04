@@ -46,7 +46,7 @@ class MovieDetail extends Component {
             return <div>Please, select the movie...</div>
         };
 
-        console.log(this.state);
+        console.log('movie_detail props: ', this.props);
 
         let genreId = this.props.selectedMovie.genre_ids;
         let foundGenre = []; 

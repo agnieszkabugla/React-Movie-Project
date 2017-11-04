@@ -82,13 +82,11 @@ class App extends Component {
       })
       .catch(error => {
         this.setState({ selectedMovie: selectedMovie });
-        console.log(error);     
       });
   }
 
   render() {
     
-    console.log(this.state);
     return (
       <div>
         <SearchBar 
