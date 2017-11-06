@@ -12,21 +12,15 @@ import MovieList from '../containers/movie_list';
 import MovieListItem from '../containers/movie_list_item';
 import MovieDetail from '../containers/movie_detail'; 
 
-const API_KEY = 'ba97ad63d202b24bf9b8e972f25ea9f1'; 
-
-const popularityURL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`;
-
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchMovie: '',
-      selectedMovie: null
+      searchMovie: ''
     }
 
     this.onInputChange = this.onInputChange.bind(this); 
     this.onSubmitSearch = this.onSubmitSearch.bind(this); 
-    this.onMovieSelected = this.onMovieSelected.bind(this); 
   };
 
   onInputChange(event) {
@@ -39,25 +33,25 @@ class App extends Component {
     }
   }
 
-  onMovieSelected(movieId) { 
-    if(!movieId) {
-      return;
-    }
+  // onMovieSelected(movieId) { 
+  //   if(!movieId) {
+  //     return;
+  //   }
 
-    let selectedMovie = _.find(this.state.searchResults, x => x.id == movieId); 
-    let searchterm = URLforDetails.replace('[selectedMovieId]', movieId);
+  //   let selectedMovie = _.find(this.state.searchResults, x => x.id == movieId); 
+  //   let searchterm = URLforDetails.replace('[selectedMovieId]', movieId);
 
-    axios.get(searchterm)
-      .then(resp => {
-        this.setState({ 
-          selectedMovieById: resp.data,
-          selectedMovie: selectedMovie
-        });
-      })
-      .catch(error => {
-        this.setState({ selectedMovie: selectedMovie });
-      });
-  }
+  //   axios.get(searchterm)
+  //     .then(resp => {
+  //       this.setState({ 
+  //         selectedMovieById: resp.data,
+  //         selectedMovie: selectedMovie
+  //       });
+  //     })
+  //     .catch(error => {
+  //       this.setState({ selectedMovie: selectedMovie });
+  //     });
+  // }
 
   render() {
     return (
@@ -68,8 +62,7 @@ class App extends Component {
           onSubmitSearch={this.onSubmitSearch} />
           <div className="container">
             <div className="row">
-              <MovieDetail 
-                selectedMovieById={this.state.selectedMovieById} />
+              <MovieDetail />
               <MovieList />
             </div>
           </div>

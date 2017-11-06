@@ -16,7 +16,6 @@ export function getInitialPage() {
             // console.log(dispatch.payload); 
         }); 
     }; 
-
     // console.log('initial movie:  ', request);
 }
 
@@ -33,16 +32,26 @@ export function fetchMovies(movie) {
     };
 }
 
+export const SELECT_MOVIE = 'SELECT_MOVIE';
+export function selectMovie(movie) {
+    console.log("selected movie", movie); 
+    return {
+        type: SELECT_MOVIE,
+        payload: movie
+    };
+}
+
 export const GET_MOVIE_DETAILS = 'GET_MOVIE_DETAILS'; 
 export function getMovieDetails(movieId) {
-    // console.log('getMovieDetails called! movieId: ', movieId);
+    console.log('getMovieDetails called! movieId: ', movieId);
     const newURL = getMoviedetailsURL.replace('[selectedMovieId]', movieId);
     const request = axios.get(newURL);
-
     // console.log('movie details: ', request);
     
-    return {
-        type: GET_MOVIE_DETAILS,
-        payload: request
+    return (dispatch) => {
+        request.then((data) => {
+            dispatch({ type: GET_MOVIE_DETAILS, payload: data.results }); 
+        }); 
+
     };
 }

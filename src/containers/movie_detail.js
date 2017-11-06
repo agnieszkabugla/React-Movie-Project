@@ -30,18 +30,9 @@ const movieGenre = {
 class MovieDetail extends Component {
     constructor(props) {
         super(props); 
-        this.state = {
-            selectedMovieById: null
-        };
+
         this.componentWillMount = this.componentWillMount.bind(this); 
     };
-    
-    // TODO Update state SELECTEDMOVIEbyID
-    // changeState(){
-    //     console.log(this.props.onMovieSelected);
-    //     this.props.changeState(this.props.onMovieSelected.selectedMovieById);
-    //     this.setState({selectedMovieById: this.props.changeState}); 
-    // } 
 
     componentWillMount() {
         this.props.getInitialPage();
@@ -73,20 +64,12 @@ class MovieDetail extends Component {
         return (
             
                 <div className="col-md-8">
-
-                        {!this.props.selectedMovieById ? (
-                            <div className="container-fluid">
-                                <div className="d-flex p-2 bg-light">
-                                    <h3>The most popular movie today: </h3>
-                                </div>
-                            </div>
-                        ) : (<p />) } 
-
+                  
                         <div className="container-fluid">
                             <div className="d-flex p-2 bg-light">
                                 <h3>
                                     {this.props.selectedMovie.title}  
-                                    {` (${this.props.selectedMovie.release_date})`}
+                                    {` (${this.props.selectedMovie.release_date.slice(0,4)})`}
                                 </h3>
                             </div>
                         </div>

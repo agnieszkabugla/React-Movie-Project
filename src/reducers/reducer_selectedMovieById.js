@@ -1,17 +1,13 @@
-import { GET_INITIAL_PAGE } from '../actions/index';
-import { SELECT_MOVIE } from '../actions/index'; 
+import { GET_MOVIE_DETAILS } from '../actions/index';
 
 export default function (state = null, action) {
     switch (action.type) {
-    case GET_INITIAL_PAGE:
+    case GET_MOVIE_DETAILS:
         if(action.payload) {
             // console.log('reducer ', action.payload);
             return action.payload;
         }
         return state; 
-    case SELECT_MOVIE:
-        console.log('reducer', action.payload); 
-        return action.payload; 
     }
     return state;
 }

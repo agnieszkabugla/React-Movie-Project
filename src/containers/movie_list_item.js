@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import { getMovieDetails } from '../actions/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'; 
+import { getMovieDetails } from '../actions/index';
+import { selectMovie } from '../actions/index'; 
 
 let imageURL = `https://image.tmdb.org/t/p/w150/[replace]`; 
 
@@ -20,7 +21,10 @@ class MovieListItem extends Component {
     }
     
     onClickButton() {
-        this.props.getMovieDetails(this.props.movie.id); 
+        this.props.selectMovie(this.props.movie);
+        this.props.getMovieDetails(this.props.selectedMovie.id); 
+        console.log(this.props.selectedMovie.id);
+        
     };
 
     toggleMoreInfo() {
@@ -34,7 +38,7 @@ class MovieListItem extends Component {
                 onClick={this.toggleMoreInfo}
                 >
                 {this.props.movie.title}
-                {` (${this.props.movie.release_date})`}
+                {` (${this.props.movie.release_date.slice(0,4)})`}
                 <br />
                 <div className={this.state.showHide}>
                     <div className="row">
@@ -55,8 +59,12 @@ class MovieListItem extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ getMovieDetails }, dispatch);
+    return bindActionCreators({ selectMovie, getMovieDetails }, dispatch);
   };
 
-  export default connect (null, mapDispatchToProps) (MovieListItem);   
+  function mapStateToProps(state) {
+    return { selectedMovie: state.selectedMovie }
+};
+
+  export default connect (mapStateToProps, mapDispatchToProps) (MovieListItem);   
   
