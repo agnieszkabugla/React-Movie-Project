@@ -1,7 +1,7 @@
 import { FETCH_MOVIES } from '../actions/index';
 
 export default function (state = [], action) {
-    console.log('oldstate: ', state);
+    // console.log('oldstate: ', state);
     switch (action.type) {
     case FETCH_MOVIES:
         // we cannot mutate the state by e.g using array.push

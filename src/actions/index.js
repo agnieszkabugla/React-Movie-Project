@@ -5,14 +5,19 @@ const mainURL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&la
 const popularityURL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`;
 const getMoviedetailsURL = `https://api.themoviedb.org/3/movie/[selectedMovieId]?api_key=${API_KEY}&append_to_response=videos`;
 
-export const GET_INITIAL_STATE = 'GET_INITIAL_STATE'; 
-export function getInitialState(movie) {
+export const GET_INITIAL_PAGE = 'GET_INITIAL_PAGE'; 
+export function getInitialPage() {
     const request = axios.get(popularityURL);
 
-    return {
-        type: GET_INITIAL_STATE,
-        payload: request
+    return (dispatch) => {
+        // console.log(request); 
+        request.then(({data}) => {
+            dispatch({ type: GET_INITIAL_PAGE, payload: data.results[0] });
+            // console.log(dispatch.payload); 
+        }); 
     }; 
+
+    // console.log('initial movie:  ', request);
 }
 
 export const FETCH_MOVIES = 'FETCH_MOVIES'; 
@@ -30,11 +35,11 @@ export function fetchMovies(movie) {
 
 export const GET_MOVIE_DETAILS = 'GET_MOVIE_DETAILS'; 
 export function getMovieDetails(movieId) {
-    console.log('getMovieDetails called! movieId: ', movieId);
+    // console.log('getMovieDetails called! movieId: ', movieId);
     const newURL = getMoviedetailsURL.replace('[selectedMovieId]', movieId);
     const request = axios.get(newURL);
 
-    console.log('movie details: ', request);
+    // console.log('movie details: ', request);
     
     return {
         type: GET_MOVIE_DETAILS,

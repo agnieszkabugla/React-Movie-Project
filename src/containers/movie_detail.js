@@ -1,5 +1,7 @@
-import React, {Component} from 'react'; 
+import React, { Component } from 'react'; 
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'; 
+import { getInitialPage } from '../actions/index'; 
 import axios from 'axios'; 
 
 const API_KEY = 'ba97ad63d202b24bf9b8e972f25ea9f1'; 
@@ -31,6 +33,7 @@ class MovieDetail extends Component {
         this.state = {
             selectedMovieById: null
         };
+        this.componentWillMount = this.componentWillMount.bind(this); 
     };
     
     // TODO Update state SELECTEDMOVIEbyID
@@ -40,13 +43,17 @@ class MovieDetail extends Component {
     //     this.setState({selectedMovieById: this.props.changeState}); 
     // } 
 
+    componentWillMount() {
+        this.props.getInitialPage();
+    }
+
 
     render() {
         if(!this.props.selectedMovie) {
             return <div>Please, select the movie...</div>
         };
 
-        console.log('movie_detail props: ', this.props);
+        // console.log('movie_detail props: ', this.props);
 
         let genreId = this.props.selectedMovie.genre_ids;
         let foundGenre = []; 
@@ -115,8 +122,12 @@ class MovieDetail extends Component {
     }
 };
 
-function mapStateToProps(state) {
-    return { selectedMovie: state.selectedMovie };
-}
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators ({ getInitialPage }, dispatch );
+};
 
-export default connect (mapStateToProps) (MovieDetail);
+function mapStateToProps(state) {
+    return { selectedMovie: state.selectedMovie }
+};
+
+export default connect (mapStateToProps, mapDispatchToProps) (MovieDetail);

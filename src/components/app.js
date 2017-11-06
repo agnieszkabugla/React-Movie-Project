@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'; 
 import { fetchMovies } from '../actions/index'; 
 import { getInitialState } from '../actions/index'; 
+import { getMovieDetails } from '../actions/index';
 import axios from 'axios'; 
 import _ from 'lodash'; 
 
@@ -69,8 +70,7 @@ class App extends Component {
             <div className="row">
               <MovieDetail 
                 selectedMovieById={this.state.selectedMovieById} />
-              <MovieList
-                />
+              <MovieList />
             </div>
           </div>
       </div>
@@ -79,7 +79,7 @@ class App extends Component {
 };
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchMovies, getInitialState }, dispatch);
+  return bindActionCreators({ fetchMovies, getInitialState, getMovieDetails }, dispatch);
 };
 
 export default connect (null, mapDispatchToProps) (App);   
