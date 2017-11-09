@@ -46,12 +46,9 @@ export function getMovieDetails(movieId) {
     console.log('getMovieDetails called! movieId: ', movieId);
     const newURL = getMoviedetailsURL.replace('[selectedMovieId]', movieId);
     const request = axios.get(newURL);
-    // console.log('movie details: ', request);
     
-    return (dispatch) => {
-        request.then((data) => {
-            dispatch({ type: GET_MOVIE_DETAILS, payload: data.results }); 
-        }); 
-
-    };
+    return {
+        type: GET_MOVIE_DETAILS,
+        payload: request
+    }; 
 }

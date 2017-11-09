@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import _ from 'lodash'; 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'; 
 import { getMovieDetails } from '../actions/index';
@@ -22,9 +23,10 @@ class MovieListItem extends Component {
     
     onClickButton() {
         this.props.selectMovie(this.props.movie);
-        this.props.getMovieDetails(this.props.selectedMovie.id); 
-        console.log(this.props.selectedMovie.id);
-        
+        let movieId = this.props.movie.id;
+        let selectedMovie = _.find(this.props.searchResults, x => x.id == movieId); 
+        this.props.getMovieDetails(movieId); 
+        console.log(movieId);
     };
 
     toggleMoreInfo() {

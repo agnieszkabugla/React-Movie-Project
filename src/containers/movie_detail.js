@@ -74,14 +74,14 @@ class MovieDetail extends Component {
                             </div>
                         </div>
                         
-                        {/*{this.props.selectedMovieById ? ( 
+                        {this.props.selectedMovieById ? (  
                             <div className="container-fluid">
                                 <div className="d-flex p-2 bg-light">
                                     <h5>{this.props.selectedMovieById.tagline}</h5>
                                     <br />
                                 </div>
                             </div>
-                        ) : (<p />) } */}
+                        ) : (<p />) }
 
                         <hr />
                         
@@ -110,7 +110,10 @@ function mapDispatchToProps(dispatch) {
 };
 
 function mapStateToProps(state) {
-    return { selectedMovie: state.selectedMovie }
+    return { 
+        selectedMovie: state.selectedMovie,
+        selectedMovieById: state.selectedMovieById
+     }
 };
 
 export default connect (mapStateToProps, mapDispatchToProps) (MovieDetail);
