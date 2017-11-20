@@ -11,7 +11,7 @@ export function getInitialPage() {
 
     return (dispatch) => {
         // console.log(request); 
-        request.then(({data}) => {
+        request.then(({ data }) => {
             dispatch({ type: GET_INITIAL_PAGE, payload: data.results[0] });
             // console.log(dispatch.payload); 
         }); 
@@ -34,7 +34,7 @@ export function fetchMovies(movie) {
 
 export const SELECT_MOVIE = 'SELECT_MOVIE';
 export function selectMovie(movie) {
-    console.log("selected movie", movie); 
+    //console.log("selected movie", movie); 
     return {
         type: SELECT_MOVIE,
         payload: movie

@@ -38,7 +38,6 @@ class MovieDetail extends Component {
         this.props.getInitialPage();
     }
 
-
     render() {
         if(!this.props.selectedMovie) {
             return <div>Please, select the movie...</div>
@@ -58,8 +57,8 @@ class MovieDetail extends Component {
 
         let imageURL = `https://image.tmdb.org/t/p/w300/${this.props.selectedMovie.poster_path}`; 
         //TODO create a videoURL
-        // console.log(this.props.selectedMovieById.videos.results);
-        // let videoURL = `https://www.youtube.com.embed/${videoID}`;
+        console.log(this.props.selectedMovieById);
+        let videoURL = `https://www.youtube.com.embed/${videoID}`;
 
         return (
             
@@ -86,12 +85,13 @@ class MovieDetail extends Component {
                         <hr />
                         
                         <p className="text-center">GENRE: {foundGenre.join(", ")}</p>
-                         {/* {<p>Production country: {this.country}</p>}  */}
-                        {/* <h5>{this.props.selectedMovieById.production_countries.map((country => {<li>{country.name}</li>}))}</h5> */}
+                        <hr />
 
-                        {/*{this.props.selectedMovieById ? (
-                            <p>Production country: {this.props.selectedMovieById.production_countries.map((country => {<ul>{country.name}</ul>}))}</p>
-                        ) : (<p></p>)} */}
+                        {this.props.selectedMovieById ? (
+                            <p className="text-center">Production country: {this.props.selectedMovieById.production_countries.map((country => 
+                                <li key={country.name}>{country.name}</li>))}
+                            </p>
+                        ) : (<p></p>)}
 
                         <div className="container">
                             <div className="row">
