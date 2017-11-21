@@ -56,9 +56,19 @@ class MovieDetail extends Component {
         };
 
         let imageURL = `https://image.tmdb.org/t/p/w300/${this.props.selectedMovie.poster_path}`; 
+        
+        
         //TODO create a videoURL
         console.log(this.props.selectedMovieById);
-        let videoURL = `https://www.youtube.com.embed/${videoID}`;
+        let videoID = []; 
+        if(this.props.selectedMovieById && this.props.selectedMovieById.videos.results[0]) {
+            let videoResults = this.props.selectedMovieById.videos.results;
+            console.log('videos', videoResults);
+            videoID.push(videoResults[0].key); 
+            console.log(videoID);
+        }
+        let videoURL = `https://www.youtube.com/embed/${videoID}`;
+        
 
         return (
             
@@ -99,6 +109,10 @@ class MovieDetail extends Component {
                                 <p>{this.props.selectedMovie.overview}</p>
                             </div>
                         </div>
+                        <div className="embed-responsive embed-responsive-16by9">
+                            <iframe className="embed-responsive-item" src={videoURL} allowFullScreen></iframe>
+                         </div>
+                         <hr />
                 </div>
  
         ); 
