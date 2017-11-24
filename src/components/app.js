@@ -4,8 +4,7 @@ import { bindActionCreators } from 'redux';
 import { fetchMovies } from '../actions/index'; 
 import { getInitialState } from '../actions/index'; 
 import { getMovieDetails } from '../actions/index';
-import axios from 'axios'; 
-import _ from 'lodash'; 
+
 
 import SearchBar from '../containers/search_bar';
 import MovieList from '../containers/movie_list'; 
@@ -31,27 +30,7 @@ class App extends Component {
     if (event.which === 13 || event.key === 13) {
       this.props.fetchMovies(this.state.searchMovie);
     }
-  }
-
-  // onMovieSelected(movieId) { 
-  //   if(!movieId) {
-  //     return;
-  //   }
-
-  //   let selectedMovie = _.find(this.state.searchResults, x => x.id == movieId); 
-  //   let searchterm = URLforDetails.replace('[selectedMovieId]', movieId);
-
-  //   axios.get(searchterm)
-  //     .then(resp => {
-  //       this.setState({ 
-  //         selectedMovieById: resp.data,
-  //         selectedMovie: selectedMovie
-  //       });
-  //     })
-  //     .catch(error => {
-  //       this.setState({ selectedMovie: selectedMovie });
-  //     });
-  // }
+  };
 
   render() {
     return (

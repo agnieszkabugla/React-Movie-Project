@@ -5,20 +5,20 @@ const mainURL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&la
 const popularityURL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`;
 const getMoviedetailsURL = `https://api.themoviedb.org/3/movie/[selectedMovieId]?api_key=${API_KEY}&append_to_response=videos`;
 
+// ACTION SENDING AN API REQUEST TO GET MOST POPULAR MOVIE AT THE MOMENT
+// IT DISPATCHES ONLY THE FIRST POPULAR MOVIE FROM THE RESULTS LIST
 export const GET_INITIAL_PAGE = 'GET_INITIAL_PAGE'; 
 export function getInitialPage() {
     const request = axios.get(popularityURL);
 
     return (dispatch) => {
-        // console.log(request); 
         request.then(({ data }) => {
             dispatch({ type: GET_INITIAL_PAGE, payload: data.results[0] });
-            // console.log(dispatch.payload); 
         }); 
     }; 
-    // console.log('initial movie:  ', request);
 }
 
+//ACTION THAT SENDS AN API REQUEST BASED ON A SEARCHTERM 
 export const FETCH_MOVIES = 'FETCH_MOVIES'; 
 export function fetchMovies(movie) {
     //creating a new url suitable for query search 

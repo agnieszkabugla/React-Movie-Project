@@ -66,7 +66,7 @@ class MovieDetail extends Component {
             console.log('videos', videoResults);
             videoID.push(videoResults[0].key); 
             console.log(videoID);
-        }
+        } 
         let videoURL = `https://www.youtube.com/embed/${videoID}`;
         
 
