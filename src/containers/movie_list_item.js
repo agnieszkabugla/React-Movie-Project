@@ -26,7 +26,7 @@ class MovieListItem extends Component {
         let movieId = this.props.movie.id;
         let selectedMovie = _.find(this.props.searchResults, x => x.id == movieId); 
         this.props.getMovieDetails(movieId); 
-        console.log(movieId);
+        //console.log(movieId);
     };
 
     toggleMoreInfo() {
@@ -62,9 +62,9 @@ class MovieListItem extends Component {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({ selectMovie, getMovieDetails }, dispatch);
-  };
+};
 
-  function mapStateToProps(state) {
+function mapStateToProps(state) {
     return { selectedMovie: state.selectedMovie }
 };
 

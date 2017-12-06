@@ -35,10 +35,12 @@ class App extends Component {
   render() {
     return (
       <div>
+        <div className="transbox"/>
         <SearchBar 
           value={this.state.searchMovie} 
           onInputChange={this.onInputChange}
           onSubmitSearch={this.onSubmitSearch} />
+          <br />
           <div className="container">
             <div className="row">
               <MovieDetail />

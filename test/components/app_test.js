@@ -1,12 +1,16 @@
 import { renderComponent , expect } from '../test_helper';
 import App from '../../src/components/app';
 
-// describe('App', () => {
+describe('App', () => {
 
-//   it('has a div element', () => {
+    let component; 
+    
+    beforeEach(() => {
+        component = renderComponent(App);
+    });
 
-//     const component = renderComponent(App);
-//     expect(component.find('div')).to.exist;
-//   });
-// });
+    it('has a div element', () => {
+        expect(component.find('div')).to.exist;
+    });
+});
 

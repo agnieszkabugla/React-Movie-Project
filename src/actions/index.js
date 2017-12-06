@@ -32,6 +32,7 @@ export function fetchMovies(movie) {
     };
 }
 
+//ACTION THAT SELECTS MOVIE FROM MOVIE LIST
 export const SELECT_MOVIE = 'SELECT_MOVIE';
 export function selectMovie(movie) {
     //console.log("selected movie", movie); 
@@ -41,9 +42,11 @@ export function selectMovie(movie) {
     };
 }
 
+//ACTION THAT SENDS API REQUEST TO GET MORE DETAILS 
+// API REQUEST IS BASED ON SELECTED MOVIE ID
 export const GET_MOVIE_DETAILS = 'GET_MOVIE_DETAILS'; 
 export function getMovieDetails(movieId) {
-    console.log('getMovieDetails called! movieId: ', movieId);
+    //console.log('getMovieDetails called! movieId: ', movieId);
     const newURL = getMoviedetailsURL.replace('[selectedMovieId]', movieId);
     const request = axios.get(newURL);
     

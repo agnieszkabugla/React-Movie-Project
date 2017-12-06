@@ -44,7 +44,7 @@ class MovieDetail extends Component {
         };
 
         // console.log('movie_detail props: ', this.props);
-
+        console.log(this.props); 
         let genreId = this.props.selectedMovie.genre_ids;
         let foundGenre = []; 
         if (Array.isArray(genreId)) {
@@ -57,15 +57,14 @@ class MovieDetail extends Component {
 
         let imageURL = `https://image.tmdb.org/t/p/w300/${this.props.selectedMovie.poster_path}`; 
         
-        
-        //TODO create a videoURL
-        console.log(this.props.selectedMovieById);
+        //create video URL based on selectedMovieById prop
+        //console.log(this.props.selectedMovieById);
         let videoID = []; 
         if(this.props.selectedMovieById && this.props.selectedMovieById.videos.results[0]) {
             let videoResults = this.props.selectedMovieById.videos.results;
-            console.log('videos', videoResults);
+            //console.log('videos', videoResults);
             videoID.push(videoResults[0].key); 
-            console.log(videoID);
+            //console.log(videoID);
         } 
         let videoURL = `https://www.youtube.com/embed/${videoID}`;
         
@@ -73,7 +72,9 @@ class MovieDetail extends Component {
         return (
             
                 <div className="col-md-8">
-                  
+                    {!this.props.selectedMovieById ? (
+                        <h4>The most popular movie today</h4>
+                    ) : (<p />) }
                         <div className="container-fluid">
                             <div className="d-flex p-2 bg-light">
                                 <h3>
@@ -109,10 +110,12 @@ class MovieDetail extends Component {
                                 <p>{this.props.selectedMovie.overview}</p>
                             </div>
                         </div>
-                        <div className="embed-responsive embed-responsive-16by9">
-                            <iframe className="embed-responsive-item" src={videoURL} allowFullScreen></iframe>
-                         </div>
-                         <hr />
+                        {videoID.length >= 1 ? (
+                            <div className="embed-responsive embed-responsive-16by9">
+                                <iframe className="embed-responsive-item" src={videoURL} allowFullScreen></iframe>
+                            </div>
+                        ) : (<p></p>)}
+                        <hr />
                 </div>
  
         ); 

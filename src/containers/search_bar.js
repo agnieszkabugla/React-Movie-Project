@@ -7,7 +7,7 @@ class SearchBar extends Component {
 
     render() { 
         return (
-        <div className="jumbotron jumbotron-fluid">
+        <div className="jumbotron jumbotron-fluid searchbar">
            <div className="container">
                <h1 className="display-3">Movie Search</h1>
                <p className="lead">This is a simple movie search. Type in a title of the movie you want to find or just a part of its title. </p>

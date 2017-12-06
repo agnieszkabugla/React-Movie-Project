@@ -10,7 +10,7 @@ export default function (state = null, action) {
         }
         return state; 
     case SELECT_MOVIE:
-        console.log('reducer', action.payload); 
+        //console.log('reducer', action.payload); 
         return action.payload; 
     }
     return state;
