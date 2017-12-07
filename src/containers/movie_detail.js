@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'; 
 import { getInitialPage } from '../actions/index'; 
+import { getImdbDetails } from '../actions/index'; 
 import axios from 'axios'; 
 
 const API_KEY = 'ba97ad63d202b24bf9b8e972f25ea9f1'; 
@@ -27,15 +28,26 @@ const movieGenre = {
     37: 'western'
 };
 
+
+
 class MovieDetail extends Component {
     constructor(props) {
         super(props); 
 
         this.componentWillMount = this.componentWillMount.bind(this); 
+        this.onClickButton = this.onClickButton.bind(this); 
     };
 
     componentWillMount() {
         this.props.getInitialPage();
+    }
+
+    onClickButton() {
+        console.log("movielistitem: ", this.props.selectedMovieById); 
+        if (this.props.selectedMovieById) {
+            let imdbID = this.props.selectedMovieById.imdb_id; 
+            this.props.getImdbDetails(imdbID);
+        } 
     }
 
     render() {
@@ -67,7 +79,8 @@ class MovieDetail extends Component {
             //console.log(videoID);
         } 
         let videoURL = `https://www.youtube.com/embed/${videoID}`;
-        
+        let text = "Check IMDB Rating"; 
+    
 
         return (
             
@@ -94,15 +107,23 @@ class MovieDetail extends Component {
                         ) : (<p />) }
 
                         <hr />
-                        
-                        <p className="text-center">GENRE: {foundGenre.join(", ")}</p>
+                        {foundGenre.length >= 1 ? (
+                            <p className="text-center">GENRE: {foundGenre.join(", ")}</p>
+                        ) : (<p />)}
                         <hr />
 
-                        {this.props.selectedMovieById ? (
+                        {this.props.selectedMovieById && this.props.selectedMovieById.production_countries.length >= 1 ? (
                             <p className="text-center">Production country: {this.props.selectedMovieById.production_countries.map((country => 
                                 <li key={country.name}>{country.name}</li>))}
                             </p>
                         ) : (<p></p>)}
+
+                        
+                        <span
+                            onClick={this.onClickButton}
+                            className="btn btn-light btn-sm btn-block">
+                            { (this.props.ImdbDetails && text === "Check IMDB Rating" ) ? this.props.ImdbDetails.rating : text }
+                        </span>
 
                         <div className="container">
                             <div className="row">
@@ -123,13 +144,14 @@ class MovieDetail extends Component {
 };
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators ({ getInitialPage }, dispatch );
+    return bindActionCreators ({ getInitialPage, getImdbDetails }, dispatch );
 };
 
 function mapStateToProps(state) {
     return { 
         selectedMovie: state.selectedMovie,
-        selectedMovieById: state.selectedMovieById
+        selectedMovieById: state.selectedMovieById,
+        ImdbDetails: state.ImdbDetails
      }
 };
 

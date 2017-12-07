@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'; 
 import { getMovieDetails } from '../actions/index';
+import { getImdbDetails } from '../actions/index'; 
 import { selectMovie } from '../actions/index'; 
 
 let imageURL = `https://image.tmdb.org/t/p/w150/[replace]`; 
@@ -27,6 +28,12 @@ class MovieListItem extends Component {
         let selectedMovie = _.find(this.props.searchResults, x => x.id == movieId); 
         this.props.getMovieDetails(movieId); 
         //console.log(movieId);
+        //console.log("movielistitem: ", this.props.selectedMovieById); 
+        
+        // if (this.props.selectedMovieById) {
+        //     let imdbID = this.props.selectedMovieById.imdb_id; 
+        //     this.props.getImdbDetails(imdbId);
+        // } 
     };
 
     toggleMoreInfo() {
@@ -61,11 +68,14 @@ class MovieListItem extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ selectMovie, getMovieDetails }, dispatch);
+    return bindActionCreators({ selectMovie, getMovieDetails, getImdbDetails }, dispatch);
 };
 
 function mapStateToProps(state) {
-    return { selectedMovie: state.selectedMovie }
+    return { 
+        selectedMovie: state.selectedMovie,         
+        selectedMovieById: state.selectedMovieById 
+    }
 };
 
   export default connect (mapStateToProps, mapDispatchToProps) (MovieListItem);   

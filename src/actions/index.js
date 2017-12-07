@@ -4,6 +4,9 @@ const API_KEY = 'ba97ad63d202b24bf9b8e972f25ea9f1';
 const mainURL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=[searchterm]`; 
 const popularityURL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`;
 const getMoviedetailsURL = `https://api.themoviedb.org/3/movie/[selectedMovieId]?api_key=${API_KEY}&append_to_response=videos`;
+const imdbURL = `http://www.theimdbapi.org/api/movie?movie_id=[imdbID]`; 
+
+
 
 // ACTION SENDING AN API REQUEST TO GET MOST POPULAR MOVIE AT THE MOMENT
 // IT DISPATCHES ONLY THE FIRST POPULAR MOVIE FROM THE RESULTS LIST
@@ -52,6 +55,19 @@ export function getMovieDetails(movieId) {
     
     return {
         type: GET_MOVIE_DETAILS,
+        payload: request
+    }; 
+}
+
+//ACTION THAT SENDS API REQUEST TO GET IMDB DETAILS
+export const GET_IMDB_DETAILS = 'GET_IMDB_DETAILS'; 
+export function getImdbDetails(imdbID) {
+    const newURL = imdbURL.replace('[imdbID]', imdbID); 
+    console.log('action creator: ', imdbID); 
+    const request = axios.get(newURL); 
+    
+    return {
+        type: GET_IMDB_DETAILS,
         payload: request
     }; 
 }
