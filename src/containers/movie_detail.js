@@ -86,11 +86,13 @@ class MovieDetail extends Component {
             
                 <div className="col-md-8">
                     {!this.props.selectedMovieById ? (
-                        <h4>The most popular movie today</h4>
+                        <div className="bg-info">
+                            <h4 className="text-center">The most popular movie today</h4>
+                        </div>
                     ) : (<p />) }
                         <div className="container-fluid">
                             <div className="d-flex p-2 bg-light">
-                                <h3>
+                                <h3 className="text-center">
                                     {this.props.selectedMovie.title}  
                                     {` (${this.props.selectedMovie.release_date.slice(0,4)})`}
                                 </h3>

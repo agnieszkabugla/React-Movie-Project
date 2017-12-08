@@ -1,23 +1,56 @@
-/* .transbox {
-    width: 1080px;
-    height: 600px;
-    position: relative; 
-    margin: auto;
-    padding: 0; 
-    background-color: #ffffff;
-    background-image: url(https://images.unsplash.com/photo-1460881680858-30d872d5b530?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&s=f3dcd650e05c0433c49eb626ee0c2546); 
-    z-index: -1;
-    /* background-size: 900px;
-    background-position-y: -90px; */
-
-.searchbar {
-    opacity: 0.9;
-    z-index: 1;   
-    top: 50px;
-    margin: auto;
-    width: 1080px; 
+/* WHOLE APP */
+hr {
+    width: 75%; 
+	border-top: 1px solid #f8f8f8;
+	border-bottom: 1px solid rgba(0,0,0,0.2); 
 }
 
+#no-margins {
+    margin: 0;
+    padding: 0; 
+    background-color: #dee2e8; 
+    max-width: 100%;
+    min-width: 100%;  
+}
+
+/* SEARCH BAR */
+.white-color {
+    color: #f9f9f9; 
+}
+
+#h1-font {
+    font-family: 'Arima Madurai', cursive;
+    font-weight: 500; 
+}
+
+#big-search-bar {
+    min-height: 80px; 
+}
+
+#jumbotron-color {
+    background-color: #212e44; 
+}
+
+#charlie {
+    position: relative;
+    left: 10px;
+    top: -30px; 
+}
+
+/*  QUOTE DIV */
+.quote {
+    background-color: #85f7a0; 
+    padding: 0;
+    margin: 0; 
+    min-width: 100%; 
+    min-height: 120px;
+    position: relative;
+    top: -60px; 
+}
+
+/* MOVIE DETAIL */
+
+/* MOVIE LIST */
 .list-group-item {
     cursor: pointer; 
 }
@@ -28,12 +61,6 @@
 
 .img-responsive {
     margin: 0 auto;
-}
-
-hr {
-	width: 600px;
-	border-top: 1px solid #f8f8f8;
-	border-bottom: 1px solid rgba(0,0,0,0.2); 
 }
 
 .hidden {

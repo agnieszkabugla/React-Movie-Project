@@ -7,12 +7,12 @@ class SearchBar extends Component {
 
     render() { 
         return (
-        <div className="jumbotron jumbotron-fluid searchbar">
+        <div className="jumbotron jumbotron-fluid" id="jumbotron-color">
            <div className="container">
-               <h1 className="display-3">Movie Search</h1>
-               <p className="lead">This is a simple movie search. Type in a title of the movie you want to find or just a part of its title. </p>
+               <h1 className="display-3 white-color" id="h1-font">Movie Search</h1>
+               <p className="lead white-color">This is a simple movie search. Type in a title of the movie you want to find or just a part of its title. </p>
                <div className="input-group mb-2 mb-sm-0">
-                   <div className="input-group-addon">
+                   <div className="input-group-addon" id="big-search-bar">
                        <i className="fa fa-video-camera" /> 
                     </div>
                     <input 
