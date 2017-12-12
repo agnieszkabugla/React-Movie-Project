@@ -38,10 +38,13 @@ class MovieDetail extends Component {
         this.onClickButton = this.onClickButton.bind(this); 
     };
 
+    // before the components mounts send an axios request to get 
+    // the most popular movie today from the moviedb api
     componentWillMount() {
         this.props.getInitialPage();
     }
 
+    //get IMDB rating and IMDB details 
     onClickButton() {
         console.log("movielistitem: ", this.props.selectedMovieById); 
         if (this.props.selectedMovieById) {
@@ -55,7 +58,8 @@ class MovieDetail extends Component {
             return <div>Please, select the movie...</div>
         };
 
-        // console.log('movie_detail props: ', this.props);
+        //create an array with genres matching selected movie
+        // use movieGenre object declared at the top of this file
         console.log(this.props); 
         let genreId = this.props.selectedMovie.genre_ids;
         let foundGenre = []; 
@@ -78,61 +82,75 @@ class MovieDetail extends Component {
             videoID.push(videoResults[0].key); 
             //console.log(videoID);
         } 
-        let videoURL = `https://www.youtube.com/embed/${videoID}`;
-        let text = "Check IMDB Rating"; 
-    
+        let videoURL = `https://www.youtube.com/embed/${videoID}`;    
 
         return (
-            
-                <div className="col-md-8">
+                    <div className="col-md-8">
+                    {/* If the user has not typed or selected any movie yet, it shows the most popular movie  */}
+                    {/* according to the moviedb api */}
                     {!this.props.selectedMovieById ? (
-                        <div className="bg-info">
-                            <h4 className="text-center">The most popular movie today</h4>
+                        <div className="the-best row">
+                            {/* <div className="col-2"><i className="fa fa-trophy fa-3x float-left"></i></div> */}
+                            <div className="col-12">
+                                <h4 className="text-center align-middle" id="h4-font">The most popular movie today: </h4>
+                                <hr />
+                            </div>
                         </div>
                     ) : (<p />) }
+                    {/* render movie title */}
                         <div className="container-fluid">
-                            <div className="d-flex p-2 bg-light">
-                                <h3 className="text-center">
+                            <div className="d-flex p-2">
+                                <h3 className="title">
                                     {this.props.selectedMovie.title}  
                                     {` (${this.props.selectedMovie.release_date.slice(0,4)})`}
                                 </h3>
                             </div>
                         </div>
                         
+                        {/* render a tagline, if there is any */}
                         {this.props.selectedMovieById ? (  
                             <div className="container-fluid">
-                                <div className="d-flex p-2 bg-light">
-                                    <h5>{this.props.selectedMovieById.tagline}</h5>
+                                <div className="d-flex p-2 ">
+                                    <h5 className="text-center tagline">{this.props.selectedMovieById.tagline}</h5>
                                     <br />
                                 </div>
+                                <hr />
                             </div>
                         ) : (<p />) }
 
-                        <hr />
+                        {/* render a movie genre */}
                         {foundGenre.length >= 1 ? (
-                            <p className="text-center">GENRE: {foundGenre.join(", ")}</p>
+                            <p className="text-center genre"><b>GENRE: </b>{foundGenre.join(", ")}</p>
                         ) : (<p />)}
-                        <hr />
-
+                        
+                        {/* render a production country */}
                         {this.props.selectedMovieById && this.props.selectedMovieById.production_countries.length >= 1 ? (
-                            <p className="text-center">Production country: {this.props.selectedMovieById.production_countries.map((country => 
+                            <p className="text-center country"><b>Production country: </b>{this.props.selectedMovieById.production_countries.map((country => 
                                 <li key={country.name}>{country.name}</li>))}
                             </p>
-                        ) : (<p></p>)}
+                        ) : (<p />)}
 
-                        
-                        <span
-                            onClick={this.onClickButton}
-                            className="btn btn-light btn-sm btn-block">
-                            { (this.props.ImdbDetails && text === "Check IMDB Rating" ) ? this.props.ImdbDetails.rating : text }
-                        </span>
-
+                        {/* render a poster  and movie overview */}
                         <div className="container">
                             <div className="row">
-                                <img className="img-responsive" src={imageURL} />
-                                <p>{this.props.selectedMovie.overview}</p>
+                                <img className="img-responsive poster" src={imageURL} />
+                                <p className="overview">{this.props.selectedMovie.overview}</p>
                             </div>
                         </div>
+
+                        {/* a button to get IMDB rating */}
+                        {this.props.selectedMovieById ? ( 
+                        <div>
+                            <span
+                                onClick={this.onClickButton}
+                                className="btn btn-light btn-sm btn-block">
+                                Do you want to know IMDB rating? Click me.
+                            </span>
+                            { (this.props.ImdbDetails) ? `IMDB RATING: ${this.props.ImdbDetails.rating}` : <p /> }
+                        </div>
+                        ) : (<p />)}
+
+                        {/* render a movie trailer from youtube */}
                         {videoID.length >= 1 ? (
                             <div className="embed-responsive embed-responsive-16by9">
                                 <iframe className="embed-responsive-item" src={videoURL} allowFullScreen></iframe>
@@ -140,7 +158,6 @@ class MovieDetail extends Component {
                         ) : (<p></p>)}
                         <hr />
                 </div>
- 
         ); 
     }
 };

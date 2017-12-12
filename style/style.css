@@ -1,16 +1,20 @@
 /* WHOLE APP */
 hr {
     width: 75%; 
-	border-top: 1px solid #f8f8f8;
-	border-bottom: 1px solid rgba(0,0,0,0.2); 
+	border-top: 1px solid #85f7a0 !important;
+	border-bottom: 1px solid rgba(0,0,0,0.2) !important; 
 }
 
 #no-margins {
     margin: 0;
     padding: 0; 
-    background-color: #dee2e8; 
+    background-color:#f9f9f9 ; 
     max-width: 100%;
     min-width: 100%;  
+}
+
+#background {
+    background-color: #212e44; 
 }
 
 /* SEARCH BAR */
@@ -50,17 +54,82 @@ hr {
 
 /* MOVIE DETAIL */
 
-/* MOVIE LIST */
-.list-group-item {
-    cursor: pointer; 
+#h4-font {
+    font-size: 2em;
+    font-weight: 300; 
+    color: #f9f9f9; 
 }
 
-.list-group-item:hover {
-    background-color: #eee;
+/* .fa-trophy {
+    color: #fffa82; 
+    margin-left: 60px; 
+} */
+
+.title {
+    color: #f9f9f9;
+    margin: auto; 
+    letter-spacing: 3px; 
+    font-size: 2em; 
+    text-align: center;  
+}
+
+.tagline {
+    color: #f9f9f9; 
+    margin: auto; 
+    font-weight: 200; 
+}
+
+.genre {
+    color: #f9f9f9; 
+    margin: auto; 
+    font-weight: 200; 
+}
+
+.country {
+    color: #f9f9f9; 
+    margin: auto; 
+    padding: 20px 0; 
+    font-weight: 200; 
+}
+
+.poster {
+    border: 1px solid #212e44; 
+    border-radius: 0.25rem;  
+}
+
+.overview {
+    color: #f9f9f9; 
+    margin: auto; 
+    padding-top: 10px; 
+    font-weight: 200; 
+}
+
+
+/* MOVIE LIST */
+#list-group-item {
+    cursor: pointer;
+    background-color: #212e44;
+    color: #f9f9f9;     
+    border: 1px solid #b7fac7; 
+}
+
+#list-group-item:hover {
+    background-color: #5a7f8c;
+    color: #000000; 
+    font-weight: 500; 
 }
 
 .img-responsive {
     margin: 0 auto;
+}
+
+.margin-auto {
+    margin: auto; 
+}
+
+#button {
+    background-color: #85f7a0;
+    border: 1px solid #85f7a0; 
 }
 
 .hidden {

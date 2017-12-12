@@ -34,7 +34,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div id="background">
         <div className="container"/>
         <SearchBar 
           value={this.state.searchMovie} 
@@ -44,15 +44,15 @@ class App extends Component {
           <div className="quote">
             <div className="container">
               <div className="row ">
-              <div className="col-3 align-self-start">
-                <a target="_blank" href="https://www.vexels.com/vectors/preview/126981/charles-chaplin-cartoon-character">
-                  <img id="charlie" src="./src/components/charles-chaplin-cartoon-character-by-Vexels.png" alt="charlie" height="200" width="200" />
-                </a>
-              </div>
-              <div className="col-9 align-self-center">
-                <h3 className="text-right font-italic">"No good movie is too long and no bad movie is short enough."</h3>
-                <h5 className="text-right">Roger Ebert</h5>
-              </div>
+                <div className="col-3 align-self-start">
+                  <a target="_blank" href="https://www.vexels.com/vectors/preview/126981/charles-chaplin-cartoon-character">
+                    <img id="charlie" src="./src/components/charles-chaplin-cartoon-character-by-Vexels.png" alt="charlie" height="200" width="200" />
+                  </a>
+                </div>
+                <div className="col-9 align-self-center">
+                  <h3 className="text-right font-italic">"No good movie is too long and no bad movie is short enough."</h3>
+                  <h5 className="text-right">Roger Ebert</h5>
+                </div>
               </div>
             </div>
           </div>

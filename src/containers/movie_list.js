@@ -17,9 +17,11 @@ class MovieList extends Component {
                 movie={movie} />
             });
         return (
+            
             <ul className="col-md-4 list-group">
                 {movieItems}
             </ul>
+            
         ); 
     }
 }

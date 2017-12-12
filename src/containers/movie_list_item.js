@@ -44,6 +44,7 @@ class MovieListItem extends Component {
         return (
             <li 
                 className="list-group-item"
+                id="list-group-item"
                 onClick={this.toggleMoreInfo}
                 >
                 {this.props.movie.title}
@@ -51,11 +52,17 @@ class MovieListItem extends Component {
                 <br />
                 <div className={this.state.showHide}>
                     <div className="row">
-                        <hr/>
-                        <img className="img-responsive" src={imageURL.replace('[replace]', this.props.movie.backdrop_path )}/>
-                        <hr />
+                        {this.props.movie.backdrop_path ? (
+                            <div className="margin-auto">
+                                <hr/>
+                                    <img className="img-responsive" src={imageURL.replace('[replace]', this.props.movie.backdrop_path )}/>
+                                <hr />
+                            </div> )
+                        : (<p />)}
+                        
                         <span 
                             onClick={this.onClickButton}
+                            id="button"
                             className="btn btn-light btn-sm btn-block">
                             Details
                         </span>
