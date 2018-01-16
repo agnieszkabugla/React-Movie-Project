@@ -60,14 +60,14 @@ export function getMovieDetails(movieId) {
 }
 
 //ACTION THAT SENDS API REQUEST TO GET IMDB DETAILS
-export const GET_IMDB_DETAILS = 'GET_IMDB_DETAILS'; 
-export function getImdbDetails(imdbID) {
-    const newURL = imdbURL.replace('[imdbID]', imdbID); 
-    console.log('action creator: ', imdbID); 
-    const request = axios.get(newURL); 
+// export const GET_IMDB_DETAILS = 'GET_IMDB_DETAILS'; 
+// export function getImdbDetails(imdbID) {
+//     const newURL = imdbURL.replace('[imdbID]', imdbID); 
+//     console.log('action creator: ', imdbID); 
+//     const request = axios.get(newURL); 
     
-    return {
-        type: GET_IMDB_DETAILS,
-        payload: request
-    }; 
-}
+//     return {
+//         type: GET_IMDB_DETAILS,
+//         payload: request
+//     }; 
+// }

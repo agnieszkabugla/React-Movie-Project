@@ -93,7 +93,7 @@ class MovieDetail extends Component {
                             {/* <div className="col-2"><i className="fa fa-trophy fa-3x float-left"></i></div> */}
                             <div className="col-12">
                                 <h4 className="text-center align-middle" id="h4-font">The most popular movie today: </h4>
-                                <hr />
+                                <hr className="fade-away"/>
                             </div>
                         </div>
                     ) : (<p />) }
@@ -114,7 +114,7 @@ class MovieDetail extends Component {
                                     <h5 className="text-center tagline">{this.props.selectedMovieById.tagline}</h5>
                                     <br />
                                 </div>
-                                <hr />
+                                <hr  className="fade-away"/>
                             </div>
                         ) : (<p />) }
 
@@ -135,11 +135,12 @@ class MovieDetail extends Component {
                             <div className="row">
                                 <img className="img-responsive poster" src={imageURL} />
                                 <p className="overview">{this.props.selectedMovie.overview}</p>
+                                <br />
                             </div>
                         </div>
 
                         {/* a button to get IMDB rating */}
-                        {this.props.selectedMovieById ? ( 
+                        {/* {this.props.selectedMovieById ? ( 
                         <div>
                             <span
                                 onClick={this.onClickButton}
@@ -148,7 +149,7 @@ class MovieDetail extends Component {
                             </span>
                             { (this.props.ImdbDetails) ? `IMDB RATING: ${this.props.ImdbDetails.rating}` : <p /> }
                         </div>
-                        ) : (<p />)}
+                        ) : (<p />)} */}
 
                         {/* render a movie trailer from youtube */}
                         {videoID.length >= 1 ? (
@@ -156,7 +157,7 @@ class MovieDetail extends Component {
                                 <iframe className="embed-responsive-item" src={videoURL} allowFullScreen></iframe>
                             </div>
                         ) : (<p></p>)}
-                        <hr />
+                        <hr className="fade-away" />
                 </div>
         ); 
     }

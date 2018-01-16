@@ -1,8 +1,10 @@
-/* WHOLE APP */
-hr {
+/* ----------------------WHOLE APP----------------------- */
+
+hr.fade-away {
+    background: linear-gradient(to right, rgba(133,247,160,1) 0%,rgba(133,247,160,0.12) 100%);
     width: 75%; 
-	border-top: 1px solid #85f7a0 !important;
-	border-bottom: 1px solid rgba(0,0,0,0.2) !important; 
+    border: none; 
+    height: 2px; 
 }
 
 #no-margins {
@@ -15,9 +17,11 @@ hr {
 
 #background {
     background-color: #212e44; 
+    background-image: url(../src/components/blurred_lines.jpeg);
+    background-size: cover;  
 }
 
-/* SEARCH BAR */
+/*-------------------------- SEARCH BAR -------------------------- */
 .white-color {
     color: #f9f9f9; 
 }
@@ -35,13 +39,59 @@ hr {
     background-color: #212e44; 
 }
 
+.links-div {
+    width: 100%; 
+    top: 0;
+    position: relative;
+}
+
+#tmdb {
+    width: 30px; 
+    height: 30px; 
+    position: absolute;
+    right: 2%; 
+    top: -20px;  
+}
+
+#imdb {
+    width: 45px; 
+    height: 30px; 
+    position: absolute;
+    right: 6%; 
+    top: -20px; 
+}
+/*SMALL SCREEN*/
+@media only screen and (min-width: 320px) and (max-width: 500px) {
+    #tmdb {
+        right: 1%; 
+    }
+    #imdb {
+        right: 15%; 
+    }
+}
+
+/* MEDIUM SCREEN*/
+@media only screen and (min-width: 501px) and (max-width: 1025px) {
+    #tmdb {
+        width: 60px; 
+        height: 60px;
+        right: 1%; 
+    }
+    #imdb {
+        width: 85px; 
+        height: 60px; 
+        right: 15%; 
+    }
+}
+
+
+/*  -------------------------- QUOTE DIV -------------------------- */
 #charlie {
     position: relative;
     left: 10px;
     top: -30px; 
 }
 
-/*  QUOTE DIV */
 .quote {
     background-color: #85f7a0; 
     padding: 0;
@@ -52,12 +102,27 @@ hr {
     top: -60px; 
 }
 
-/* MOVIE DETAIL */
+/*SMALL SCREEN*/
+@media only screen and (max-width: 416px) {
+    #charlie {
+        position: relative; 
+        left: -35px; 
+        height: 150px; 
+        width: 150px; 
+    }
+}
+
+/* -------------------------- MOVIE DETAIL -------------------------- */
+#row {
+    background-color: rgba(255,255,255,0.4)
+}
+
 
 #h4-font {
     font-size: 2em;
-    font-weight: 300; 
-    color: #f9f9f9; 
+    font-weight: 400; 
+    color: #212e44; 
+    text-shadow: 0.5px 0.5px 0.5px #f9f9f9; 
 }
 
 /* .fa-trophy {
@@ -66,7 +131,7 @@ hr {
 } */
 
 .title {
-    color: #f9f9f9;
+    color: #212e44;
     margin: auto; 
     letter-spacing: 3px; 
     font-size: 2em; 
@@ -74,19 +139,19 @@ hr {
 }
 
 .tagline {
-    color: #f9f9f9; 
+    color: #212e44; 
     margin: auto; 
     font-weight: 200; 
 }
 
 .genre {
-    color: #f9f9f9; 
+    color: #212e44; 
     margin: auto; 
     font-weight: 200; 
 }
 
 .country {
-    color: #f9f9f9; 
+    color: #212e44; 
     margin: auto; 
     padding: 20px 0; 
     font-weight: 200; 
@@ -98,25 +163,30 @@ hr {
 }
 
 .overview {
-    color: #f9f9f9; 
+    color: #212e44; 
+    font-size: 1.3rem; 
     margin: auto; 
     padding-top: 10px; 
-    font-weight: 200; 
+    font-weight: 400; 
 }
 
 
-/* MOVIE LIST */
+/* -------------------------- MOVIE LIST -------------------------- */
 #list-group-item {
     cursor: pointer;
-    background-color: #212e44;
-    color: #f9f9f9;     
-    border: 1px solid #b7fac7; 
+    background-color: rgba(255,255,255,0.5);
+    color: #212e44;     
+    border: 1px solid rgba(255,255,255,0.3); 
 }
 
 #list-group-item:hover {
-    background-color: #5a7f8c;
+    background-color: rgba(255,255,255,0.8);
     color: #000000; 
     font-weight: 500; 
+}
+
+.list-group {
+    padding-right: 0 !important; 
 }
 
 .img-responsive {
@@ -128,8 +198,48 @@ hr {
 }
 
 #button {
-    background-color: #85f7a0;
-    border: 1px solid #85f7a0; 
+    border: none; 
+    animation-name: color_change;
+	animation-duration: 7s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate-reverse; 
+}
+
+
+@-webkit-keyframes color_change {
+    0% { background-color: #dcf785; }
+    25% { background-color: #85f7a0; }
+    50% { background-color: #a085f7; }
+    75% { background-color: #f785dc; }
+    100% { background-color: #f785a3; }
+}
+@-moz-keyframes color_change {
+    0% { background-color: #dcf785; }
+    25% { background-color: #85f7a0; }
+    50% { background-color: #a085f7; }
+    75% { background-color: #f785dc; }
+    100% { background-color: #f785a3; }
+}
+@-ms-keyframes color_change {
+    0% { background-color: #dcf785; }
+    25% { background-color: #85f7a0; }
+    50% { background-color: #a085f7; }
+    75% { background-color: #f785dc; }
+    100% { background-color: #f785a3; }
+}
+@-o-keyframes color_change {
+    0% { background-color: #dcf785; }
+    25% { background-color: #85f7a0; }
+    50% { background-color: #a085f7; }
+    75% { background-color: #f785dc; }
+    100% { background-color: #f785a3; }
+}
+@keyframes color_change {
+    0% { background-color: #dcf785; }
+    25% { background-color: #85f7a0; }
+    50% { background-color: #a085f7; }
+    75% { background-color: #f785dc; }
+    100% { background-color: #f785a3; }
 }
 
 .hidden {
@@ -138,4 +248,19 @@ hr {
 
  .show {
     display:block;
+ }
+
+ /* -------------------------- FOOTER -------------------------- */
+ .footer {
+     margin: 2px auto; 
+     background-color: #212e44; 
+ }
+
+ .footer p {
+     color: #f9f9f9;
+     margin-left: 2%;
+     text-align: center; 
+     font-size: 0.7rem;
+     font-weight: 200; 
+
  }

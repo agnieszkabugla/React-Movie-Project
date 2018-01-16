@@ -29,6 +29,7 @@ class App extends Component {
   onSubmitSearch(event) {
     if (event.which === 13 || event.key === 13) {
       this.props.fetchMovies(this.state.searchMovie);
+      this.setState({searchMovie: ''}); 
     }
   };
 
@@ -57,10 +58,15 @@ class App extends Component {
             </div>
           </div>
           <div className="container">
-            <div className="row">
+            <div className="row" id="row">
               <MovieDetail />
               <MovieList />
             </div>
+          </div>
+          <div className="footer">
+            <p>The Movie Search website has been written only for educational purposes. 
+              This product uses the TMDb API but is not endorsed or certified by TMDb.</p>
+            <p>Copyright 2018 Agnieszka Bugla</p>
           </div>
       </div>
     );
