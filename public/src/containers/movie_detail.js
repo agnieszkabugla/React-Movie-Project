@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'; 
 import { getInitialPage } from '../actions/index'; 
-import { getImdbDetails } from '../actions/index'; 
+//import { getImdbDetails } from '../actions/index'; 
 import axios from 'axios'; 
 
 const API_KEY = 'ba97ad63d202b24bf9b8e972f25ea9f1'; 
@@ -36,7 +36,7 @@ class MovieDetail extends Component {
 
         this.componentWillMount = this.componentWillMount.bind(this); 
         this.onClickButton = this.onClickButton.bind(this); 
-    };
+    }
 
     // before the components mounts send an axios request to get 
     // the most popular movie today from the moviedb api
@@ -46,7 +46,7 @@ class MovieDetail extends Component {
 
     //get IMDB rating and IMDB details 
     onClickButton() {
-        console.log("movielistitem: ", this.props.selectedMovieById); 
+        //console.log("movielistitem: ", this.props.selectedMovieById); 
         if (this.props.selectedMovieById) {
             let imdbID = this.props.selectedMovieById.imdb_id; 
             this.props.getImdbDetails(imdbID);
@@ -55,12 +55,12 @@ class MovieDetail extends Component {
 
     render() {
         if(!this.props.selectedMovie) {
-            return <div>Please, select the movie...</div>
-        };
+            return <div>Please, select the movie...</div>;
+        }
 
         //create an array with genres matching selected movie
         // use movieGenre object declared at the top of this file
-        console.log(this.props); 
+        //console.log(this.props); 
         let genreId = this.props.selectedMovie.genre_ids;
         let foundGenre = []; 
         if (Array.isArray(genreId)) {
@@ -69,7 +69,7 @@ class MovieDetail extends Component {
                     foundGenre.push(movieGenre[x]); 
                 }
             });
-        };
+        }
 
         let imageURL = `https://image.tmdb.org/t/p/w300/${this.props.selectedMovie.poster_path}`; 
         
@@ -96,7 +96,7 @@ class MovieDetail extends Component {
                                 <hr className="fade-away"/>
                             </div>
                         </div>
-                    ) : (<p />) }
+                    ) : (<p />)}
                     {/* render movie title */}
                         <div className="container-fluid">
                             <div className="d-flex p-2">
@@ -116,7 +116,7 @@ class MovieDetail extends Component {
                                 </div>
                                 <hr  className="fade-away"/>
                             </div>
-                        ) : (<p />) }
+                        ) : (<p />)}
 
                         {/* render a movie genre */}
                         {foundGenre.length >= 1 ? (
@@ -161,18 +161,18 @@ class MovieDetail extends Component {
                 </div>
         ); 
     }
-};
+}
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators ({ getInitialPage, getImdbDetails }, dispatch );
-};
+    return bindActionCreators ({ getInitialPage }, dispatch );
+}
 
 function mapStateToProps(state) {
     return { 
         selectedMovie: state.selectedMovie,
-        selectedMovieById: state.selectedMovieById,
-        ImdbDetails: state.ImdbDetails
-     }
-};
+        selectedMovieById: state.selectedMovieById
+        //ImdbDetails: state.ImdbDetails
+     };
+}
 
 export default connect (mapStateToProps, mapDispatchToProps) (MovieDetail);

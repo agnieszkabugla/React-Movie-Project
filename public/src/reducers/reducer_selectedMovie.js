@@ -1,5 +1,4 @@
-import { GET_INITIAL_PAGE } from '../actions/index';
-import { SELECT_MOVIE } from '../actions/index'; 
+import { GET_INITIAL_PAGE, SELECT_MOVIE } from '../actions/index';
 
 export default function (state = null, action) {
     switch (action.type) {

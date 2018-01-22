@@ -28,7 +28,7 @@ class SearchBar extends Component {
                         placeholder="Movie title"
                         onChange={this.props.onInputChange}
                         value={this.props.value} 
-                        onKeyPress={this.props.onSubmitSearch } />
+                        onKeyPress={this.props.onSubmitSearch} />
                     
                </div>
             </div> 

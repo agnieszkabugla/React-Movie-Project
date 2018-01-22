@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'; 
 import { bindActionCreators } from 'redux'; 
-import { fetchMovies } from '../actions/index'; 
-import { getInitialState } from '../actions/index'; 
-import { getMovieDetails } from '../actions/index';
-
+import { fetchMovies, getInitialPage, getMovieDetails } from '../actions/index'; 
 
 import SearchBar from '../containers/search_bar';
 import MovieList from '../containers/movie_list'; 
@@ -16,22 +13,22 @@ class App extends Component {
     super(props);
     this.state = {
       searchMovie: ''
-    }
+    };
 
     this.onInputChange = this.onInputChange.bind(this); 
     this.onSubmitSearch = this.onSubmitSearch.bind(this); 
-  };
+  }
 
   onInputChange(event) {
     this.setState({searchMovie: event.target.value}); 
-  };
+  }
 
   onSubmitSearch(event) {
     if (event.which === 13 || event.key === 13) {
       this.props.fetchMovies(this.state.searchMovie);
       this.setState({searchMovie: ''}); 
     }
-  };
+  }
 
   render() {
     return (
@@ -71,10 +68,10 @@ class App extends Component {
       </div>
     );
   }
-};
+}
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchMovies, getInitialState, getMovieDetails }, dispatch);
-};
+  return bindActionCreators({ fetchMovies, getInitialPage, getMovieDetails }, dispatch);
+}
 
 export default connect (null, mapDispatchToProps) (App);   

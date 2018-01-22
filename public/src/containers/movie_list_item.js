@@ -2,9 +2,8 @@ import React, {Component} from 'react';
 import _ from 'lodash'; 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'; 
-import { getMovieDetails } from '../actions/index';
-import { getImdbDetails } from '../actions/index'; 
-import { selectMovie } from '../actions/index'; 
+import { getMovieDetails, selectMovie } from '../actions/index';
+//import { getImdbDetails } from '../actions/index'; 
 
 let imageURL = `https://image.tmdb.org/t/p/w150/[replace]`; 
 
@@ -15,7 +14,7 @@ class MovieListItem extends Component {
         this.state = {showHide: 'hidden'}; 
 
         if (!this.props.movie) {
-            return <div>Please, type in the movie title...</div>
+            return <div>Please, type in the movie title...</div>;
         }
 
         this.toggleMoreInfo = this.toggleMoreInfo.bind(this); 
@@ -34,7 +33,7 @@ class MovieListItem extends Component {
         //     let imdbID = this.props.selectedMovieById.imdb_id; 
         //     this.props.getImdbDetails(imdbId);
         // } 
-    };
+    }
 
     toggleMoreInfo() {
         let css = (this.state.showHide === "hidden") ? "show" : "hidden"; 
@@ -75,15 +74,15 @@ class MovieListItem extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ selectMovie, getMovieDetails, getImdbDetails }, dispatch);
-};
+    return bindActionCreators({ selectMovie, getMovieDetails }, dispatch);
+}
 
 function mapStateToProps(state) {
     return { 
         selectedMovie: state.selectedMovie,         
         selectedMovieById: state.selectedMovieById 
-    }
-};
+    };
+}
 
   export default connect (mapStateToProps, mapDispatchToProps) (MovieListItem);   
   
