@@ -11,10 +11,10 @@ class SearchBar extends Component {
            <div className="container">
                 <div className="links-div">
                     <a href="https://www.themoviedb.org/" >
-                        <img src="../src/components/TMDB.png" id="tmdb"/>
+                        <img src="../../style/TMDB.png" id="tmdb"/>
                     </a>
                     <a href="http://www.imdb.com/">
-                        <img src="../src/components/IMDB.png" id="imdb"/>
+                        <img src="../../style/IMDB.png" id="imdb"/>
                     </a>
                 </div>
                <h1 className="display-3 white-color" id="h1-font">Movie Search</h1>

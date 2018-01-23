@@ -17,7 +17,7 @@ hr.fade-away {
 
 #background {
     background-color: #212e44; 
-    background-image: url(../src/components/blurred_lines.jpeg);
+    background-image: url("blurred_lines.jpeg");
     background-size: cover;  
 }
 

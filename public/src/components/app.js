@@ -44,7 +44,7 @@ class App extends Component {
               <div className="row ">
                 <div className="col-3 align-self-start">
                   <a target="_blank" href="https://www.vexels.com/vectors/preview/126981/charles-chaplin-cartoon-character">
-                    <img id="charlie" src="./src/components/charles-chaplin-cartoon-character-by-Vexels.png" alt="charlie" height="200" width="200" />
+                    <img id="charlie" src="..\..\style\charles-chaplin-cartoon-character-by-Vexels.png" alt="charlie" height="200" width="200" />
                   </a>
                 </div>
                 <div className="col-9 align-self-center">

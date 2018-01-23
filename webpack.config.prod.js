@@ -1,36 +1,39 @@
 import webpack from 'webpack';
 import path from 'path';
+import ExtractTextPlugin from 'extract-text-webpack-plugin'; 
+
+const GLOBALS = {
+  'process.env.NODE_ENV': JSON.stringify('production')
+}; 
 
 export default {
   debug: true,
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   noInfo: false,
-  entry: [
-    //'eventsource-polyfill', //necessary with hot reloading in IE
-    'webpack-hot-middleware/client?reload=true', //note that it reloads the page if hot module reloading fails
-    path.resolve(__dirname, './public/src/index')
-  ],
+  entry: [path.resolve(__dirname, './public/src/index')],
   target: 'web',
   output: {
-    path:path.resolve(__dirname, 'dist'),  //note: physical files are only output by the production build task 'npm run build'
+    path: path.resolve(__dirname, 'dist'),  //note: physical files are only output by the production build task 'npm run build'
     publicPath: '/',
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: path.resolve(__dirname, './public/src')
+    contentBase: path.resolve(__dirname, './dist')
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.DefinePlugin(GLOBALS),
+    new ExtractTextPlugin('style.css'),
+    //eliminate duplicate packages when generatin bundle
+    new webpack.optimize.DedupePlugin(),
+    //minify JS
+    new webpack.optimize.UglifyJsPlugin()
   ],
   module: {
     loaders: [
       { test: /\.js$/, include: path.join(__dirname, './public/src'), exclude: 'node_modules', loaders: ['babel'] },
-      { test: /\.css$/, loaders: ['style', 'css'] },
-      { test: /\.jpeg$/, loader: "url-loader" }, 
-      { test: /\.png$/, loader: "url-loader" }, 
-
-      /* last four loaders are for Bootstrap's fonts */
+      { test: /\.css$/, loader: ExtractTextPlugin.extract("css?sourceMap")},
+      /* last for loaders are for Bootstrap's fonts */
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file" },
       { test: /\.(woff|woff2)$/, loader: "url?prefix=font/&limit=5000" },
       { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream" },
