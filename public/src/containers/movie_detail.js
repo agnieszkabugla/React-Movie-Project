@@ -6,7 +6,7 @@ import { getInitialPage } from '../actions/index';
 import axios from 'axios'; 
 import PropTypes from 'prop-types';
 
-const API_KEY = process.env.APIKEY; 
+const API_KEY = 'ba97ad63d202b24bf9b8e972f25ea9f1'; 
 const movieGenre = {
     28: 'action',
     12: 'adventure',
@@ -166,7 +166,7 @@ class MovieDetail extends Component {
 
 MovieDetail.propTypes = {
     getInitialPage: PropTypes.func,
-    selectedMovieById: PropTypes.array,
+    selectedMovieById: PropTypes.object,
     selectedMovie: PropTypes.object 
 }; 
 
