@@ -3,6 +3,9 @@ bundle.js
 npm-debug.log
 .DS_Store
 
+# Environment variables with sensitive data
+.env
+
 # IntelliJ
 *.iml
 /.idea

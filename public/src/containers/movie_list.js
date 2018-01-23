@@ -1,6 +1,7 @@
 import React, { Component } from 'react'; 
 import { connect } from 'react-redux'; 
 import MovieListItem from './movie_list_item';
+import PropTypes from 'prop-types';
 
 class MovieList extends Component {
     constructor(props) {
@@ -27,6 +28,11 @@ class MovieList extends Component {
         ); 
     }
 }
+
+MovieList.propTypes = {
+    searchResults: PropTypes.array,
+    onMovieSelected: PropTypes.func
+}; 
 
 function mapStateToProps(state) {
     return {

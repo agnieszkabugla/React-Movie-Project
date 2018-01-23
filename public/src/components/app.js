@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'; 
 import { connect } from 'react-redux'; 
 import { bindActionCreators } from 'redux'; 
 import { fetchMovies, getInitialPage, getMovieDetails } from '../actions/index'; 
@@ -69,6 +70,10 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  fetchMovies: PropTypes.func
+}; 
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ fetchMovies, getInitialPage, getMovieDetails }, dispatch);

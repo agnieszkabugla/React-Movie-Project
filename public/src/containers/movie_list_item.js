@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import _ from 'lodash'; 
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'; 
 import { getMovieDetails, selectMovie } from '../actions/index';
@@ -72,6 +73,13 @@ class MovieListItem extends Component {
     }
    
 }
+
+MovieListItem.propTypes = {
+    movie: PropTypes.object,
+    selectMovie: PropTypes.func,
+    searchResults: PropTypes.array,
+    getMovieDetails: PropTypes.func
+}; 
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({ selectMovie, getMovieDetails }, dispatch);

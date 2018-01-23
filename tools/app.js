@@ -1,6 +1,7 @@
 import express from 'express';
 import webpack from 'webpack';
 import path from 'path';
+import dotenv from 'dotenv'; 
 import config from '../webpack.config.dev';
 
 /* eslint-disable no-console */
@@ -8,6 +9,8 @@ import config from '../webpack.config.dev';
 const port = 8080;
 const app = express();
 const compiler = webpack(config);
+
+dotenv.config();
 
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
